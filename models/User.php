@@ -51,16 +51,24 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         ];
     }
 
-    public static function findByUsername($username)
+    public static function findByLogin($login)
     {
         $query = new Query();
         $user = $query->select("*")
             ->from(self::tableName())
-            ->where("login = :login", [":login" => $username])
+            ->where("login = :login", [":login" => $login])
             ->limit(1)
             ->one()
         ;
         return new static($user);
+    }
+
+    public static function addUser($login, $password)
+    {
+        Yii::$app->db->createCommand()->insert(self::tableName(), [
+            'login' => $login,
+            'password' => $password
+        ])->execute();
     }
 
     public function validatePassword($password)

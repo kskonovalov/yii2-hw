@@ -75,10 +75,32 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
+        $model->scenario = LoginForm::SCENARIO_LOGIN;
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
         return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Login action.
+     *
+     * @return string
+     */
+    public function actionRegistration()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+        $model->scenario = LoginForm::SCENARIO_REGISTRATION;
+        if ($model->load(Yii::$app->request->post()) && $model->registration()) {
+            return $this->goBack();
+        }
+        return $this->render('registration', [
             'model' => $model,
         ]);
     }
