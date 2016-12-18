@@ -32,11 +32,11 @@ class LoginForm extends Model
         return [
             // login and password are both required
             [['login', 'password'], 'required', 'on' => self::SCENARIO_LOGIN],
-            [['login', 'password', 'password2'], 'required', 'on' => self::SCENARIO_REGISTRATION],
-            // rememberMe must be a boolean value
-            ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword', 'on' => self::SCENARIO_LOGIN],
+            // rememberMe must be a boolean value
+            ['rememberMe', 'boolean'],
+            [['login', 'password', 'password2'], 'required', 'on' => self::SCENARIO_REGISTRATION],
             ['login', 'loginNotExists', 'on' => self::SCENARIO_REGISTRATION],
             [['password', 'password2'], 'comparePasswords', 'on' => self::SCENARIO_REGISTRATION],
         ];
@@ -61,17 +61,15 @@ class LoginForm extends Model
 
     public function loginNotExists($attribute, $params)
     {
-        $res = User::findByLogin($this->login);
-        die(VAR_DUMP($res, !empty($res)));
+        $user = User::findByLogin($this->login);
+        if($user->id > 0) {
+            $this->addError($attribute, 'Login is busy');
+        }
     }
     public function comparePasswords($attribute, $params)
     {
-        die(VAR_DUMP("comparePasswords",$attribute, $params));
-        if (!$this->hasErrors()) {
-            $user = $this->getUser();
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect login or password.');
-            }
+        if($this->password !== $this->password2) {
+            $this->addError($attribute, 'passwords don\'t match');
         }
     }
 
@@ -94,11 +92,9 @@ class LoginForm extends Model
     public function registration()
     {
         if ($this->validate()) {
-            $user = $this->saveUser();
-            if($user) {
-                return Yii::$app->user->login($user,
-                    $this->rememberMe ? 3600 * 24 * 30 : 0);
-            }
+            $this->saveUser();
+            $this->rememberMe = true;
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
         return false;
     }

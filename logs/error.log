@@ -2,3 +2,4 @@
 [Sat May 07 19:18:04.283367 2016] [:error] [pid 1938] [client 127.0.0.1:36784] PHP Notice:  Undefined variable: _name in /media/data/www/yii2/web/Item.php on line 26
 [Sat May 07 19:18:05.290884 2016] [:error] [pid 1938] [client 127.0.0.1:36784] PHP Notice:  Undefined variable: _name in /media/data/www/yii2/web/Item.php on line 26
 [Sat May 07 19:19:08.649786 2016] [:error] [pid 16766] [client 127.0.0.1:36793] PHP Notice:  Undefined property: Item::$bbb in /media/data/www/yii2/web/Item.php on line 34
+[Sun Dec 18 10:16:35.974255 2016] [:error] [pid 20661] [client 127.0.0.1:35326] PHP Parse error:  syntax error, unexpected ';' in /media/data/www/yii2/models/LoginForm.php on line 69, referer: http://yii2.dev/index.php?r=site%2Fregistration

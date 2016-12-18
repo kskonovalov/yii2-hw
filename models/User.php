@@ -16,7 +16,7 @@ use yii\db\Query;
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     public $id;
-    public $username;
+    public $login;
     public $password;
     public $authKey;
     /**
@@ -69,6 +69,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'login' => $login,
             'password' => $password
         ])->execute();
+        return self::findByLogin($login);
     }
 
     public function validatePassword($password)
