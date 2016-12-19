@@ -74,7 +74,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public function validatePassword($password)
     {
-        return $password === $this->password;
+        //$password -- передали
+        //$this->password -- из базы
+        return self::getHashedPassword($password) === $this->password;
+    }
+
+    public static function getHashedPassword($password)
+    {
+        return md5($password);
     }
 
 

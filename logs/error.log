@@ -3,3 +3,15 @@
 [Sat May 07 19:18:05.290884 2016] [:error] [pid 1938] [client 127.0.0.1:36784] PHP Notice:  Undefined variable: _name in /media/data/www/yii2/web/Item.php on line 26
 [Sat May 07 19:19:08.649786 2016] [:error] [pid 16766] [client 127.0.0.1:36793] PHP Notice:  Undefined property: Item::$bbb in /media/data/www/yii2/web/Item.php on line 34
 [Sun Dec 18 10:16:35.974255 2016] [:error] [pid 20661] [client 127.0.0.1:35326] PHP Parse error:  syntax error, unexpected ';' in /media/data/www/yii2/models/LoginForm.php on line 69, referer: http://yii2.dev/index.php?r=site%2Fregistration
+[Mon Dec 19 18:59:11.179848 2016] [:error] [pid 20659] [client 127.0.0.1:37462] PHP Fatal error:  Class 'app\\models\\Users' not found in /media/data/www/yii2/models/UsersSearch.php on line 14
+[Mon Dec 19 18:59:20.883218 2016] [:error] [pid 15357] [client 127.0.0.1:37474] PHP Fatal error:  Class 'app\\models\\Users' not found in /media/data/www/yii2/models/UsersSearch.php on line 14
+[Mon Dec 19 18:59:58.226503 2016] [:error] [pid 14618] [client 127.0.0.1:37482] PHP Fatal error:  Class 'app\\models\\Users' not found in /media/data/www/yii2/models/UsersSearch.php on line 14
+[Mon Dec 19 18:59:58.904995 2016] [:error] [pid 15360] [client 127.0.0.1:37484] PHP Fatal error:  Class 'app\\models\\Users' not found in /media/data/www/yii2/models/UsersSearch.php on line 14
+[Mon Dec 19 18:59:59.280267 2016] [:error] [pid 20659] [client 127.0.0.1:37486] PHP Fatal error:  Class 'app\\models\\Users' not found in /media/data/www/yii2/models/UsersSearch.php on line 14
+[Mon Dec 19 18:59:59.467357 2016] [:error] [pid 7754] [client 127.0.0.1:37488] PHP Fatal error:  Class 'app\\models\\Users' not found in /media/data/www/yii2/models/UsersSearch.php on line 14
+[Mon Dec 19 19:18:57.229213 2016] [:error] [pid 7754] [client 127.0.0.1:38334] PHP Fatal error:  Class 'app\\models\\User2' not found in /media/data/www/yii2/models/UsersSearch.php on line 43
+[Mon Dec 19 19:18:58.672661 2016] [:error] [pid 15357] [client 127.0.0.1:38346] PHP Fatal error:  Class 'app\\models\\User2' not found in /media/data/www/yii2/models/UsersSearch.php on line 43
+[Mon Dec 19 19:19:05.929962 2016] [:error] [pid 22340] [client 127.0.0.1:38356] PHP Fatal error:  Class 'app\\models\\User2' not found in /media/data/www/yii2/models/UsersSearch.php on line 13
+[Mon Dec 19 19:19:07.545357 2016] [:error] [pid 20660] [client 127.0.0.1:38358] PHP Fatal error:  Class 'app\\models\\User2' not found in /media/data/www/yii2/models/UsersSearch.php on line 13
+[Mon Dec 19 19:19:29.182146 2016] [:error] [pid 15357] [client 127.0.0.1:38366] PHP Fatal error:  Class 'app\\controllers\\Users2Search' not found in /media/data/www/yii2/controllers/UsersController.php on line 39
+[Mon Dec 19 19:19:29.789525 2016] [:error] [pid 26739] [client 127.0.0.1:38368] PHP Fatal error:  Class 'app\\controllers\\Users2Search' not found in /media/data/www/yii2/controllers/UsersController.php on line 39

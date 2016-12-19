@@ -52,8 +52,8 @@ class LoginForm extends Model
     public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
-            $user = $this->getUser();
-            if (!$user || !$user->validatePassword($this->password)) {
+            $user = $this->getUser(); // $user -- из базы
+            if (!$user || !$user->validatePassword($this->password)) { //$this->password -- тот который передали
                 $this->addError($attribute, 'Incorrect login or password.');
             }
         }
@@ -115,6 +115,7 @@ class LoginForm extends Model
     public function saveUser()
     {
         if ($this->_user === false) {
+            $this->password = User::getHashedPassword($this->password);
             $this->_user = User::addUser($this->login, $this->password);
         }
         return $this->_user;

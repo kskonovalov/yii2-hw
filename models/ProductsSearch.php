@@ -5,11 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\models\Products;
 
 /**
- * UsersSearch represents the model behind the search form about `app\models\Users`.
+ * ProductsSearch represents the model behind the search form about `app\models\Products`.
  */
-class UsersSearch extends User
+class ProductsSearch extends Products
 {
     /**
      * @inheritdoc
@@ -18,7 +19,7 @@ class UsersSearch extends User
     {
         return [
             [['id'], 'integer'],
-            [['login', 'password'], 'safe'],
+            [['name', 'description', 'picture'], 'safe'],
         ];
     }
 
@@ -40,7 +41,7 @@ class UsersSearch extends User
      */
     public function search($params)
     {
-        $query = UsersCrud::find();
+        $query = Products::find();
 
         // add conditions that should always apply here
 
@@ -49,6 +50,7 @@ class UsersSearch extends User
         ]);
 
         $this->load($params);
+
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
@@ -60,8 +62,9 @@ class UsersSearch extends User
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'login', $this->login])
-            ->andFilterWhere(['like', 'password', $this->password]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'picture', $this->picture]);
 
         return $dataProvider;
     }
