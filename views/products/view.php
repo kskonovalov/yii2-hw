@@ -24,8 +24,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
-    <?= DetailView::widget([
+    <?php
+    echo Html::img($model->picture, [
+            "alt" => $model->name,
+            "class" => "pull-left img-thumbnail",
+            "style" => "width: 500px; height: auto; margin: 0 20px 20px 0;"
+    ]);
+    echo strip_tags($model->description, "<span><dl><dt><div>");
+    ?>
+    <? /*DetailView::widget([
         'model' => $model,
         'attributes' => [
             'picture' => [
@@ -42,6 +49,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         ],
         "template" => "{value}"
-    ]) ?>
+    ])*/ ?>
 
 </div>
