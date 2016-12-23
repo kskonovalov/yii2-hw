@@ -1,18 +1,19 @@
 <?php
 
-namespace app\controllers;
+namespace app\modules\products\controllers;
 
 use Yii;
-use app\models\Products;
-use app\models\ProductsSearch;
+use app\modules\products\models\Products;
+use app\modules\products\models\ProductsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\base\ViewContextInterface;
 
 /**
- * ProductsController implements the CRUD actions for Products model.
+ * Default controller for the `products` module
  */
-class ProductsController extends Controller
+class DefaultController extends Controller
 {
     /**
      * @inheritdoc
@@ -27,6 +28,11 @@ class ProductsController extends Controller
                 ],
             ],
         ];
+    }
+
+    public function getViewPath()
+    {
+        return Yii::getAlias('@app/modules/products/views/products');
     }
 
     /**

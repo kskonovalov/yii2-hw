@@ -15,3 +15,7 @@
 [Mon Dec 19 19:19:07.545357 2016] [:error] [pid 20660] [client 127.0.0.1:38358] PHP Fatal error:  Class 'app\\models\\User2' not found in /media/data/www/yii2/models/UsersSearch.php on line 13
 [Mon Dec 19 19:19:29.182146 2016] [:error] [pid 15357] [client 127.0.0.1:38366] PHP Fatal error:  Class 'app\\controllers\\Users2Search' not found in /media/data/www/yii2/controllers/UsersController.php on line 39
 [Mon Dec 19 19:19:29.789525 2016] [:error] [pid 26739] [client 127.0.0.1:38368] PHP Fatal error:  Class 'app\\controllers\\Users2Search' not found in /media/data/www/yii2/controllers/UsersController.php on line 39
+[Fri Dec 23 09:43:46.527439 2016] [:error] [pid 6022] [client 127.0.0.1:39920] PHP Fatal error:  Class 'app\\models\\Products' not found in /media/data/www/yii2/models/ProductsSearch.php on line 14
+[Fri Dec 23 09:51:38.542905 2016] [:error] [pid 18675] [client 127.0.0.1:40188] PHP Fatal error:  Class 'app\\modules\\products\\controllers\\VerbFilter' not found in /media/data/www/yii2/modules/products/controllers/DefaultController.php on line 19
+[Fri Dec 23 09:52:13.608168 2016] [:error] [pid 18681] [client 127.0.0.1:40200] PHP Fatal error:  Class 'app\\models\\Products' not found in /media/data/www/yii2/modules/products/models/ProductsSearch.php on line 14
+[Fri Dec 23 09:52:14.296716 2016] [:error] [pid 2986] [client 127.0.0.1:40202] PHP Fatal error:  Class 'app\\models\\Products' not found in /media/data/www/yii2/modules/products/models/ProductsSearch.php on line 14

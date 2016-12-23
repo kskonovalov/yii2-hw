@@ -1,11 +1,11 @@
 <?php
 
-namespace app\models;
+namespace app\modules\products\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Products;
+use app\modules\products\models\Products;
 
 /**
  * ProductsSearch represents the model behind the search form about `app\models\Products`.
