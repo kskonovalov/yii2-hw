@@ -5,12 +5,15 @@ namespace app\modules\products\controllers;
 use Yii;
 use app\modules\products\models\Products;
 use app\modules\products\models\ProductsSearch;
+use yii\behaviors\TimestampBehavior;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\base\ViewContextInterface;
+use yii\db\Expression;
 
 /**
- * ProductsController implements the CRUD actions for Products model.
+ * Default controller for the `products` module
  */
 class ProductsController extends Controller
 {
@@ -26,7 +29,18 @@ class ProductsController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created',
+                'updatedAtAttribute' => 'updated',
+                'value' => new Expression('NOW()'),
+            ],
         ];
+    }
+
+    public function getViewPath()
+    {
+        return Yii::getAlias('@app/modules/products/views/products');
     }
 
     /**
@@ -83,7 +97,6 @@ class ProductsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

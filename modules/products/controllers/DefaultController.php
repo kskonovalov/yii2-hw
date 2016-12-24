@@ -5,6 +5,7 @@ namespace app\modules\products\controllers;
 use Yii;
 use app\modules\products\models\Products;
 use app\modules\products\models\ProductsSearch;
+use yii\db\Expression;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -89,6 +90,7 @@ class DefaultController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->touch('updated');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
