@@ -24,6 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    <p class="text-muted">
+         <?php echo ($model->created !== null) ? "<b>Created at:</b> " . $model->created . "<br />" : ""; ?>
+         <?php echo ($model->updated !== null) ? "<b>Updated at:</b> " . $model->updated : ""; ?>
+    </p>
     <?php
     echo Html::img($model->picture, [
             "alt" => $model->name,
