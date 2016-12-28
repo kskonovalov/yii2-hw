@@ -2,10 +2,12 @@
 
 namespace app\modules\products\controllers;
 
+use app\modules\products\models\Categories;
 use Yii;
 use app\modules\products\models\Products;
 use app\modules\products\models\ProductsSearch;
 use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -90,13 +92,21 @@ class DefaultController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        //$model->touch('updated');
+        $allCategories = Categories::find()->all();
+        $allCategories = ArrayHelper::toArray($allCategories, [
+            'app\modules\products\models\Categories' => [
+                'id',
+                'title',
+            ],
+        ]);
+        $allCategories = ArrayHelper::map($allCategories, "id", "title");
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'allCategories' => $allCategories
             ]);
         }
     }

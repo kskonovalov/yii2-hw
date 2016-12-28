@@ -65,4 +65,9 @@ class Products extends \yii\db\ActiveRecord
             ],
         ];
     }
+    public function getCategories()
+    {
+        return $this->hasMany(Categories::className(), ['id' => 'category_id'])
+            ->viaTable('product_category', ['product_id' => 'id']);
+    }
 }
