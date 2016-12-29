@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'name' => [
                 "attribute" => "name",
-                "value" => Html::a($product->name, ['view', 'id' => $product->id]),
+                "value" => Html::a($product->name, ['default/view', 'id' => $product->id]),
                 "format" => "html",
             ],
             'picture' => [

@@ -6,6 +6,9 @@ use app\modules\products\models\Products;
 use Yii;
 use app\modules\products\models\Categories;
 use app\modules\products\models\CategoriesSearch;
+use yii\caching\DbDependency;
+use yii\caching\ExpressionDependency;
+use yii\caching\TagDependency;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -15,6 +18,7 @@ use yii\filters\VerbFilter;
  */
 class CategoriesController extends Controller
 {
+    public static $cacheDuration = 200;
     /**
      * @inheritdoc
      */
@@ -36,8 +40,17 @@ class CategoriesController extends Controller
      */
     public function actionIndex()
     {
+        $cache = \Yii::$app->cache;
+        $key = "categoriesList" . md5(serialize(Yii::$app->request->queryParams));
+
         $searchModel = new CategoriesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if(!$dataProvider = $cache->get($key)) {
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            $dependency = new DbDependency();
+            $dependency->sql = "SELECT * FROM `categories`";
+            $cache->set($key, $dataProvider, self::$cacheDuration, $dependency);
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -53,8 +66,17 @@ class CategoriesController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $category = Categories::findOne($id);
-        $products = $category->products;
+        $cache = \Yii::$app->cache;
+        $key = "categoryProducts_{$id}";
+
+        if(!$products = $cache->get($key)) {
+            $category = Categories::findOne($id);
+            $products = $category->products;
+
+            $dependency = new DbDependency();
+            $dependency->sql = "SELECT * FROM `product_category` WHERE `category_id` = " . (int)$id;
+            $cache->set($key, $products, self::$cacheDuration, $dependency);
+        }
         return $this->render('view', [
             'model' => $model,
             'products' => $products
