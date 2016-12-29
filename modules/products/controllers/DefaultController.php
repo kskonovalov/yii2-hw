@@ -79,6 +79,7 @@ class DefaultController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'allCategories' => Categories::getAllCategories()
             ]);
         }
     }
@@ -92,21 +93,13 @@ class DefaultController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $allCategories = Categories::find()->all();
-        $allCategories = ArrayHelper::toArray($allCategories, [
-            'app\modules\products\models\Categories' => [
-                'id',
-                'title',
-            ],
-        ]);
-        $allCategories = ArrayHelper::map($allCategories, "id", "title");
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'allCategories' => $allCategories
+                'allCategories' => Categories::getAllCategories()
             ]);
         }
     }

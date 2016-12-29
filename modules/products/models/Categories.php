@@ -3,6 +3,7 @@
 namespace app\modules\products\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "categories".
@@ -40,5 +41,18 @@ class Categories extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
         ];
+    }
+
+    public static function getAllCategories()
+    {
+        $allCategories = Categories::find()->all();
+        $allCategories = ArrayHelper::toArray($allCategories, [
+            'app\modules\products\models\Categories' => [
+                'id',
+                'title',
+            ],
+        ]);
+        $allCategories = ArrayHelper::map($allCategories, "id", "title");
+        return $allCategories;
     }
 }

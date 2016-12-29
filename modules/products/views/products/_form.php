@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'picture')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'categories')->listBox($allCategories) ?>
+    <?= $form->field($model, 'categories')->listBox($allCategories, ['multiple' => 'true']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

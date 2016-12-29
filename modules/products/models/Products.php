@@ -15,6 +15,7 @@ use Yii;
  * @property string $picture
  * @property string $created
  * @property string $updated
+ * @property string $categories
  */
 class Products extends \yii\db\ActiveRecord
 {
@@ -46,11 +47,12 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
+            'name' => 'Наименование',
+            'description' => 'Описание',
             'picture' => 'Picture',
             'created' => 'Created',
             'updated' => 'Updated',
+            'categories' => 'Категории',
         ];
     }
 
@@ -69,5 +71,24 @@ class Products extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Categories::className(), ['id' => 'category_id'])
             ->viaTable('product_category', ['product_id' => 'id']);
+    }
+
+    public function afterSave($insert, $changedAttributes){
+        parent::afterSave($insert, $changedAttributes);
+        //обновляем категории
+        //удаляем старые категории
+        ProductCategory::deleteAll(["product_id" => $this->id]);
+        //записываем новые
+        $product = Yii::$app->request->post("Products");
+        if(!empty($product) && $product["categories"]) {
+            $categories = $product["categories"];
+            foreach($categories as $cat) {
+                $productCategory = new ProductCategory();
+                $productCategory->product_id = (int)$this->id;
+                $productCategory->category_id = (int)$cat;
+                $productCategory->save();
+            }
+        }
+//        $productCategories =
     }
 }
