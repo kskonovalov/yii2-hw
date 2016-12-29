@@ -43,6 +43,12 @@ class Categories extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getProducts()
+    {
+        return $this->hasMany(Products::className(), ['id' => 'product_id'])
+            ->viaTable('product_category', ['category_id' => 'id']);
+    }
+
     public static function getAllCategories()
     {
         $allCategories = Categories::find()->all();

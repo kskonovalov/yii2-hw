@@ -2,6 +2,7 @@
 
 namespace app\modules\products\controllers;
 
+use app\modules\products\models\Products;
 use Yii;
 use app\modules\products\models\Categories;
 use app\modules\products\models\CategoriesSearch;
@@ -51,8 +52,12 @@ class CategoriesController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $category = Categories::findOne($id);
+        $products = $category->products;
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'products' => $products
         ]);
     }
 

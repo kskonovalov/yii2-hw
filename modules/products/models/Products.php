@@ -67,6 +67,7 @@ class Products extends \yii\db\ActiveRecord
             ],
         ];
     }
+
     public function getCategories()
     {
         return $this->hasMany(Categories::className(), ['id' => 'category_id'])
@@ -89,6 +90,5 @@ class Products extends \yii\db\ActiveRecord
                 $productCategory->save();
             }
         }
-//        $productCategories =
     }
 }

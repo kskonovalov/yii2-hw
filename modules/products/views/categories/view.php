@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\products\models\Categories */
@@ -32,5 +33,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
         ],
     ]) ?>
+
+    <?php
+    foreach($products as $product) {
+    echo DetailView::widget([
+        'model' => $product,
+        'attributes' => [
+            'name' => [
+                "attribute" => "name",
+                "value" => Html::a($product->name, ['view', 'id' => $product->id]),
+                "format" => "html",
+            ],
+            'picture' => [
+                "attribute" => "picture",
+                "value" => $product->picture,
+                "format" => ['image', ['width' => 70]]
+            ],
+        ],
+        "template" => "<tr><td>{value}</td></tr>"
+    ]);
+    }
+    ?>
 
 </div>
